@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6kc8v34f13rp"]
+
+[ext_resource type="PackedScene" uid="uid://l3viybnqhj36" path="res://Player/player.tscn" id="1_rupst"]
+[ext_resource type="PackedScene" uid="uid://bgke4xq8u5stv" path="res://TileMaps/Dungeon.tscn" id="1_wt17y"]
+
+[node name="Playground" type="Node2D"]
+
+[node name="Node2D" parent="." instance=ExtResource("1_wt17y")]
+
+[node name="Player" parent="." instance=ExtResource("1_rupst")]
+position = Vector2(57.665, 34.195)
+_moveSpeed = 50.0
