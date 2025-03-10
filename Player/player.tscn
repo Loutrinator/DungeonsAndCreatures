@@ -1,23 +1,113 @@
-[gd_scene load_steps=4 format=3 uid="uid://l3viybnqhj36"]
+[gd_scene load_steps=18 format=3 uid="uid://l3viybnqhj36"]
 
 [ext_resource type="Script" uid="uid://d3ki1i3yi52ca" path="res://Player/Scripts/Player.cs" id="1_4ntmi"]
-[ext_resource type="Texture2D" uid="uid://c8c3jvtdw78gp" path="res://kenney_tiny-dungeon/Tiles/tile_0084.png" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://dxggvmt1qev2d" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_f_idle_anim_f0.png" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://d4djc242uhucg" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_idle_anim_f0.png" id="3_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://cxoo8ill1br4v" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_idle_anim_f1.png" id="4_apopc"]
+[ext_resource type="Texture2D" uid="uid://7eo8ia0ejaqj" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_idle_anim_f2.png" id="5_5htga"]
+[ext_resource type="Texture2D" uid="uid://d2hqiithbulim" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_idle_anim_f3.png" id="6_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://d0j5nullr12wf" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_run_anim_f0.png" id="7_gu6f8"]
+[ext_resource type="Texture2D" uid="uid://bo7r63v88a1y4" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_run_anim_f1.png" id="8_dkpta"]
+[ext_resource type="Texture2D" uid="uid://dl87rvnst883l" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_run_anim_f2.png" id="9_lfmf2"]
+[ext_resource type="Texture2D" uid="uid://cr6414oybbbqb" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_run_anim_f3.png" id="10_pisgm"]
+[ext_resource type="Script" uid="uid://bxi4yqok8l87w" path="res://Player/Scripts/WeaponController.cs" id="11_5htga"]
+[ext_resource type="Texture2D" uid="uid://dal8y38o6djmp" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/weapon_regular_sword.png" id="12_p5o4e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_edjgo"]
 resource_name = "PlayerShape"
-radius = 8.0
+radius = 7.0
 
-[node name="Player" type="CharacterBody2D"]
-position = Vector2(1, 0)
+[sub_resource type="Animation" id="Animation_b1ygp"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_x3vf3"), ExtResource("4_apopc"), ExtResource("5_5htga"), ExtResource("6_p5o4e")]
+}
+
+[sub_resource type="Animation" id="Animation_o28un"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_4ntmi")]
+}
+
+[sub_resource type="Animation" id="Animation_n471f"]
+resource_name = "Run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_gu6f8"), ExtResource("8_dkpta"), ExtResource("9_lfmf2"), ExtResource("10_pisgm")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7emwf"]
+_data = {
+&"Idle": SubResource("Animation_b1ygp"),
+&"RESET": SubResource("Animation_o28un"),
+&"Run": SubResource("Animation_n471f")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite2D")]
 collision_mask = 16
 up_direction = Vector2(0, 1)
 script = ExtResource("1_4ntmi")
+_animationPlayer = NodePath("AnimationPlayer")
+_sprite2D = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_edjgo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 texture_filter = 1
+position = Vector2(0, -14)
+texture = ExtResource("2_4ntmi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7emwf")
+}
+
+[node name="WeaponController" type="Marker2D" parent="." node_paths=PackedStringArray("_weaponContainer")]
 position = Vector2(0, -8)
-texture = ExtResource("1_l8h54")
+script = ExtResource("11_5htga")
+_directionLerpSpeed = 5.0
+_weaponContainer = NodePath("WeaponContainer")
+
+[node name="WeaponContainer" type="Marker2D" parent="WeaponController"]
+position = Vector2(15, 0)
+rotation = 1.5708
+
+[node name="Sword" type="Node2D" parent="WeaponController/WeaponContainer"]
+
+[node name="WeaponDisplay" type="Sprite2D" parent="WeaponController/WeaponContainer/Sword"]
+texture_filter = 1
+position = Vector2(0, -7)
+texture = ExtResource("12_p5o4e")
