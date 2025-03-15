@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" uid="uid://d3ki1i3yi52ca" path="res://Player/Scripts/Player.cs" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://dxggvmt1qev2d" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_f_idle_anim_f0.png" id="2_4ntmi"]
-[ext_resource type="Texture2D" uid="uid://unc024cagmsb" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_idle_anim_f0.png" id="3_5htga"]
-[ext_resource type="Texture2D" uid="uid://d7pvnqejb41c" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_idle_anim_f1.png" id="4_p5o4e"]
-[ext_resource type="Texture2D" uid="uid://cccavsmjva3aa" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_idle_anim_f2.png" id="5_gu6f8"]
-[ext_resource type="Texture2D" uid="uid://bbkjch68s4soh" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_idle_anim_f3.png" id="6_dkpta"]
-[ext_resource type="Texture2D" uid="uid://6bjpptgumxmf" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_run_anim_f0.png" id="7_lfmf2"]
-[ext_resource type="Texture2D" uid="uid://dpveqwlvvgqm5" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_run_anim_f1.png" id="8_pisgm"]
-[ext_resource type="Texture2D" uid="uid://sri25wp8iyfk" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_run_anim_f2.png" id="9_b1ygp"]
-[ext_resource type="Texture2D" uid="uid://cbjucof3rdnqq" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_run_anim_f3.png" id="10_o28un"]
-[ext_resource type="Script" uid="uid://bxi4yqok8l87w" path="res://Player/Scripts/WeaponController.cs" id="11_5htga"]
-[ext_resource type="Texture2D" uid="uid://dal8y38o6djmp" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/weapon_regular_sword.png" id="12_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://d4djc242uhucg" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_idle_anim_f0.png" id="3_5htga"]
+[ext_resource type="Texture2D" uid="uid://cxoo8ill1br4v" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_idle_anim_f1.png" id="4_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://7eo8ia0ejaqj" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_idle_anim_f2.png" id="5_gu6f8"]
+[ext_resource type="Texture2D" uid="uid://d2hqiithbulim" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_idle_anim_f3.png" id="6_dkpta"]
+[ext_resource type="Texture2D" uid="uid://d0j5nullr12wf" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_run_anim_f0.png" id="7_lfmf2"]
+[ext_resource type="Texture2D" uid="uid://bo7r63v88a1y4" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_run_anim_f1.png" id="8_pisgm"]
+[ext_resource type="Texture2D" uid="uid://dl87rvnst883l" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_run_anim_f2.png" id="9_b1ygp"]
+[ext_resource type="Texture2D" uid="uid://cr6414oybbbqb" path="res://External Assets/0x72_DungeonTilesetII_v1.7/frames/knight_m_run_anim_f3.png" id="10_o28un"]
+[ext_resource type="Script" uid="uid://bl3mn15kdjiii" path="res://Player/Scripts/PlayerAttackDirectionDisplay.cs" id="11_5htga"]
+[ext_resource type="Texture2D" uid="uid://d3jvdn6tn2lq" path="res://Player/Sprites/directionArrow.png" id="12_p5o4e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_edjgo"]
 resource_name = "PlayerShape"
@@ -77,6 +77,7 @@ _data = {
 collision_mask = 16
 up_direction = Vector2(0, 1)
 script = ExtResource("1_4ntmi")
+_attackDirectionLerpSpeed = 10.0
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite2D = NodePath("Sprite2D")
 
@@ -95,25 +96,22 @@ libraries = {
 &"": SubResource("AnimationLibrary_7emwf")
 }
 
-[node name="WeaponController" type="Marker2D" parent="." node_paths=PackedStringArray("_weaponContainer")]
-position = Vector2(0, -8)
-script = ExtResource("11_5htga")
-_directionLerpSpeed = 5.0
-_weaponContainer = NodePath("WeaponContainer")
-
-[node name="WeaponContainer" type="Marker2D" parent="WeaponController"]
-position = Vector2(15, 0)
-rotation = 1.5708
-
-[node name="Sword" type="Node2D" parent="WeaponController/WeaponContainer"]
-
-[node name="WeaponDisplay" type="Sprite2D" parent="WeaponController/WeaponContainer/Sword"]
-texture_filter = 1
-position = Vector2(0, -7)
-texture = ExtResource("12_p5o4e")
-
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
+
+[node name="Cursor" type="Node2D" parent="." node_paths=PackedStringArray("_player")]
+position = Vector2(0, -2)
+script = ExtResource("11_5htga")
+_player = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
+texture_filter = 1
+position = Vector2(0, -7)
+texture = ExtResource("12_p5o4e")
