@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class Player : CharacterBody2D
 {
 	[Export]
@@ -18,6 +19,7 @@ public partial class Player : CharacterBody2D
 	{
 		int i = 42;
 		_animationPlayer.Play("Idle");
+		Game.SetMainCharacter(this);
 	}
 	
 	public override void _Process(double delta)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8fh8ikej5yie"]
+
+[ext_resource type="Texture2D" uid="uid://cgeq3bj4iu0b5" path="res://External Assets/Assets/Assets/UI/heart_full.png" id="1_kav31"]
+[ext_resource type="Script" uid="uid://b8e0g31e6dl35" path="res://UI/Scripts/HPDisplay.cs" id="2_1xnuq"]
+
+[node name="Heart" type="TextureRect"]
+texture_filter = 1
+custom_minimum_size = Vector2(10, 10)
+layout_direction = 2
+texture = ExtResource("1_kav31")
+script = ExtResource("2_1xnuq")

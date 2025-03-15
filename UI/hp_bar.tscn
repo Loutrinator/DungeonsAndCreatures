@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctu8kct6g8c5r"]
+
+[ext_resource type="Script" uid="uid://d4f7eo1vyexup" path="res://UI/Scripts/HPBar.cs" id="1_knbsx"]
+[ext_resource type="PackedScene" uid="uid://c8fh8ikej5yie" path="res://UI/heart.tscn" id="2_qxdmk"]
+
+[node name="HP Bar" type="HBoxContainer"]
+layout_direction = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 20.0
+theme_override_constants/separation = 0
+script = ExtResource("1_knbsx")
+_hPDisplay = ExtResource("2_qxdmk")

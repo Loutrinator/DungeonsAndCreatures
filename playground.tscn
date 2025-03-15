@@ -1,12 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6kc8v34f13rp"]
+[gd_scene load_steps=5 format=3 uid="uid://c6kc8v34f13rp"]
 
 [ext_resource type="PackedScene" uid="uid://l3viybnqhj36" path="res://Player/player.tscn" id="1_rupst"]
 [ext_resource type="PackedScene" uid="uid://bgke4xq8u5stv" path="res://TileMaps/Dungeon.tscn" id="1_wt17y"]
+[ext_resource type="PackedScene" uid="uid://dee70xc05l784" path="res://Enemy/enemy.tscn" id="3_m8u5f"]
+[ext_resource type="PackedScene" uid="uid://b1cr6grgkynvo" path="res://UI/GameUI.tscn" id="4_is3ju"]
 
 [node name="Playground" type="Node2D"]
 
 [node name="Dungeon" parent="." instance=ExtResource("1_wt17y")]
 
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
-position = Vector2(184, 96)
-_moveSpeed = 50.0
+position = Vector2(40, 159)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_m8u5f")]
+position = Vector2(232, 224)
+
+[node name="Enemy" parent="." instance=ExtResource("3_m8u5f")]
+position = Vector2(296, 80)
+
+[node name="GameUi" parent="." instance=ExtResource("4_is3ju")]
